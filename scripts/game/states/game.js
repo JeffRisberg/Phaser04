@@ -69,17 +69,19 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
         },
 
         pauseGame: function () {
-            this.game.paused = true;
-            this.background.tint = 0x666699;
-            this.hideAllGroups();
-            var pausedText = this.add.text(game.world.width / 2, game.world.height / 2, "Game paused.\nTap anywhere to continue.", this._fontStyle);
+            if (player.alive) {
+                this.game.paused = true;
+                this.background.tint = 0x666699;
+                this.hideAllGroups();
+                var pausedText = this.add.text(game.world.width / 2, game.world.height / 2, "Game paused.\nTap anywhere to continue.", this._fontStyle);
 
-            this.input.onDown.add(function () {
-                pausedText.destroy();
-                this.game.paused = false;
-                this.background.tint = 0xFFFFFF;
-                this.showAllGroups();
-            }, this);
+                this.input.onDown.add(function () {
+                    pausedText.destroy();
+                    this.game.paused = false;
+                    this.background.tint = 0xFFFFFF;
+                    this.showAllGroups();
+                }, this);
+            }
         },
 
         hideAllGroups: function () {
@@ -117,15 +119,17 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
 
             player.animations.play('right');
 
-            if (cursors.down.isDown) {
-                player.animations.stop();
-                player.anchor = {x: 0.5, y: 0.5};
-                player.rotation = 3.14 / 2;
-                player.frame = 4;
-            } else if (cursors.up.isDown && player.body.touching.down
-                || (this.input.pointer1.isDown && player.body.touching.down)) {
-                //  Move to the left
-                player.body.velocity.y = -1300;
+            if (player.alive) {
+                if (cursors.down.isDown) {
+                    player.animations.stop();
+                    player.anchor = {x: 0.5, y: 0.5};
+                    player.rotation = 3.14 / 2;
+                    player.frame = 4;
+                } else if (cursors.up.isDown && player.body.touching.down
+                    || (this.input.pointer1.isDown && player.body.touching.down)) {
+                    //  Move to the left
+                    player.body.velocity.y = -1300;
+                }
             }
         },
 
