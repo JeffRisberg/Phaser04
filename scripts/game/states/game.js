@@ -13,11 +13,10 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
         preload: function () {
             //pre load image
             this.load.image('background', 'media/backgrounds/background.png');
-            this.load.image('ground2', 'media/backgrounds/ground.png');
-            this.load.image('ground', 'media/backgrounds/platform.png');
+            this.load.image('ground', 'media/backgrounds/ground.png');
             this.load.image('pipe', 'media/characters/pipe.png');
-            this.load.image('razor', 'media/characters/pipe.png');
-            this.load.image('spike', 'media/characters/pipe.png');
+            this.load.image('razor', 'media/characters/razor.png');
+            this.load.image('bird', 'media/characters/bird.png');
             this.load.image('star', 'media/characters/star.png');
             this.load.image('btnPause', 'media/buttons/btn-pause.png');
             this.load.image('btnPlay', 'media/buttons/btn-play.png');
@@ -39,10 +38,10 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
             this.createPlatform();
             this.createGroups('pipes', 'pipe', this.addOnePipe, 1500);
             this.createGroups('razors', 'razor', this.addOneRazor, 3000);
-            this.createGroups('spikes', 'spike', this.addOneSpike, 5000);
+            this.createGroups('birds', 'bird', this.addOneBird, 5000);
             this.createGroups('stars', 'star', this.addOneStar, 5000);
 
-            player = game.add.sprite(32, game.world.height - 500, 'dude');
+            player = game.add.sprite(32, game.world.height - 200, 'dude');
             player.scale.setTo(3, 3);
             game.physics.arcade.enable(player);
             player.x = Math.floor((game.world.width) / 4);
@@ -94,7 +93,6 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
 
         playGame: function () {
             if (paused) {
-                // Hide panel
                 paused = false;
                 this.pausePanel.hide();
             }
@@ -108,7 +106,6 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
         },
 
         update: function () {
-
             // game.physics.arcade.overlap(player, groups["pipes"], this.hitPipe, null, this);
             // game.physics.arcade.overlap(player, groups["razors"], this.hitPipe, null, this);
             // game.physics.arcade.overlap(player, groups["spikes"], this.hitPipe, null, this);
@@ -143,25 +140,20 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
             game.add.tween(pipe).to({ y: 300 }, 2000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
         },
 
-        //TODO: this is supposed to be spinning
         addOneRazor: function () {
             var razor = groups['razors'].getFirstDead();
-            razor.tint = 0xff00ff;
-            // var delta = Math.floor(Math.random() * 300);
             razor.reset(game.stage.bounds.width, game.stage.bounds.height - 250);
             razor.body.velocity.x = -200;
             razor.checkWorldBounds = true;
             razor.outOfBoundsKill = true;
         },
 
-        addOneSpike: function () {
-            var spike = groups['spikes'].getFirstDead();
-            spike.tint = 0x00d33;
-            // var delta = Math.floor(Math.random() * 300);
-            spike.reset(game.stage.bounds.width, game.stage.bounds.height - 100);
-            spike.body.velocity.x = -200;
-            spike.checkWorldBounds = true;
-            spike.outOfBoundsKill = true;
+        addOneBird: function () {
+            var bird = groups['birds'].getFirstDead();
+            bird.reset(game.stage.bounds.width, game.stage.bounds.height - 100);
+            bird.body.velocity.x = -200;
+            bird.checkWorldBounds = true;
+            bird.outOfBoundsKill = true;
         },
 
         addOneStar: function () {
@@ -201,7 +193,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
             platforms.enableBody = true;
 
             // Here we create the ground.
-            var ground = platforms.create(0, game.world.height - 50, 'ground2');
+            var ground = platforms.create(0, game.world.height - 50, 'ground');
 
             //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
             ground.scale.setTo(4, 1);
