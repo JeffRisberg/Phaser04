@@ -42,7 +42,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
             this.createGroup('powerups', 'powerup', this.addOnePowerup, 5425);
             this.createGroup('stars', 'star', this.addOneStar, 4500);
 
-            player = game.add.sprite(32, game.world.height - 200, 'dude');
+            player = game.add.sprite(32, game.world.height - 150, 'dude');
             player.scale.setTo(2, 2);
             game.physics.arcade.enable(player);
             player.x = Math.floor((game.world.width) / 4);

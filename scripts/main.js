@@ -27,7 +27,7 @@ require([
     phaserGame.state.add('Game', game);
 
     // Start with main menu
-    phaserGame.state.start('MainMenu');
+    phaserGame.state.start('Preloader');
 
     return phaserGame;
 });
