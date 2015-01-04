@@ -7,6 +7,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
     var scoreText;
     var energy = 25;
     var energyText;
+    var fx;
 
     function Game(_game) {
         game = _game;
@@ -24,9 +25,14 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
             this.load.image('btnPause', 'media/buttons/btn-pause.png');
             this.load.image('btnPlay', 'media/buttons/btn-play.png');
             this.load.image('panel', 'media/backgrounds/panel.png');
+
             this.load.bitmapFont('kenpixelblocks', 'media/fonts/kenpixelblocks/kenpixelblocks.png', 'media/fonts/kenpixelblocks/kenpixelblocks.fnt');
+
             this.load.spritesheet('dude', 'media/characters/dude.png', 32, 48);
+
+            game.load.audio('sfx', 'media/audio/fx_mixdown.ogg');
         },
+
         create: function () {
             this._fontStyle = { font: "30px Arial", fill: "#FFCC00", stroke: "#333", strokeThickness: 5, align: "center" };
 
@@ -66,6 +72,11 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
                 { font: "35px Arial", fill: "#000" });
             energyText = this.game.add.text(game.world.width - 320, 20, "Energy: " + energy,
                 { font: "35px Arial", fill: "#000" });
+
+            fx = game.add.audio('sfx');
+            fx.addMarker('ping', 10, 1.0);
+            fx.addMarker('death', 12, 4.2);
+            fx.addMarker('shot', 17, 1.0);
         },
 
         pauseGame: function () {
@@ -177,19 +188,21 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
             star.kill();
             score += 10;
             scoreText.text = 'Score: ' + score;
+            fx.play("ping");
         },
 
         eatPowerup: function (player, powerup) {
             powerup.kill();
             energy += 1;
             energyText.text = 'Energy: ' + energy;
+            fx.play("ping");
         },
 
         hitBaddie: function (player, baddie) {
             baddie.kill();
             energy--;
             energyText.text = 'Energy: ' + energy;
-
+           
             if (energy <= 0) {
                 // Set the alive property of the player to false
                 player.alive = false;
@@ -208,6 +221,11 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
 
                 var gameOverText = this.add.text(game.world.width / 2, game.world.height / 2, "Sorry, Game Over", { font: "50px Arial"});
                 gameOverText.anchor.set(0.5);
+
+                fx.play("death");
+            }
+            else {
+                fx.play("shot");
             }
         },
 
