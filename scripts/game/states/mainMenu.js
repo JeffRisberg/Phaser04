@@ -14,7 +14,7 @@ define(function () {
             this.input.keyboard.createCursorKeys();
             this.background = this.add.tileSprite(0, 0, this.stage.bounds.width, this.stage.bounds.width, 'background');
 
-            this.add.button(500, 200, 'button-start', this.startGame, this, 1, 0, 2);
+            this.add.button(580, 200, 'button-start', this.startGame, this, 1, 0, 2);
         },
 
         update: function () {
