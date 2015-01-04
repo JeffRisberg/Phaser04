@@ -12,7 +12,7 @@ define(function () {
 
         create: function () {
             this.input.keyboard.createCursorKeys();
-            this.background = this.add.tileSprite(0, 0, this.stage.bounds.width, this.stage.bounds.width, 'background');
+            this.background = this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'background');
 
             this.add.button(580, 200, 'button-start', this.startGame, this, 1, 0, 2);
         },

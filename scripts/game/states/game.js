@@ -40,7 +40,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
             this.pausePanel = new PausePanel(this);
             this.add.existing(this.pausePanel);
 
-            this.background = game.add.tileSprite(0, 0, game.stage.bounds.width, game.cache.getImage('background').height, 'background');
+            this.background = game.add.tileSprite(0, 0, window.innerWidth, game.cache.getImage('background').height, 'background');
 
             this.createPlatform();
             this.createGroup('pipes', 'pipe', this.addOnePipe, 1500);
@@ -147,7 +147,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
         addOnePipe: function () {
             var pipe = groups['pipes'].getFirstDead();
             var delta = Math.floor(Math.random() * 400);
-            pipe.reset(game.stage.bounds.width, game.stage.bounds.height - 120 - delta);
+            pipe.reset(window.innerWidth, window.innerHeight - 120 - delta);
             pipe.body.velocity.x = -200;
             pipe.checkWorldBounds = true;
             pipe.outOfBoundsKill = true;
@@ -157,7 +157,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
         addOneRazor: function () {
             var razor = groups['razors'].getFirstDead();
             var delta = Math.floor(Math.random() * 400);
-            razor.reset(game.stage.bounds.width, game.stage.bounds.height - 100 - delta);
+            razor.reset(window.innerWidth, window.innerHeight - 100 - delta);
             razor.body.velocity.x = -200;
             razor.checkWorldBounds = true;
             razor.outOfBoundsKill = true;
@@ -166,7 +166,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
         addOnePowerup: function () {
             var powerup = groups['powerups'].getFirstDead();
             var delta = Math.floor(Math.random() * 200);
-            powerup.reset(game.stage.bounds.width, game.stage.bounds.height - 150 - delta);
+            powerup.reset(window.innerWidth, window.innerHeight - 150 - delta);
             powerup.scale.setTo(2, 2);
             powerup.body.velocity.x = -200;
             powerup.checkWorldBounds = true;
@@ -177,7 +177,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
         addOneStar: function () {
             var star = groups['stars'].getFirstDead();
             var delta = Math.floor(Math.random() * 300);
-            star.reset(game.stage.bounds.width, game.stage.bounds.height / 2 - delta);
+            star.reset(window.innerWidth, window.innerHeight / 2 - delta);
             star.scale.setTo(2, 2);
             star.body.velocity.x = -200;
             star.checkWorldBounds = true;
@@ -202,7 +202,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
             baddie.kill();
             energy--;
             energyText.text = 'Energy: ' + energy;
-           
+
             if (energy <= 0) {
                 // Set the alive property of the player to false
                 player.alive = false;
