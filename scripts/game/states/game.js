@@ -36,11 +36,10 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
         create: function () {
             this._fontStyle = { font: "30px Arial", fill: "#FFCC00", stroke: "#333", strokeThickness: 5, align: "center" };
 
-            // Let's build a pause panel
             this.pausePanel = new PausePanel(this);
             this.add.existing(this.pausePanel);
 
-            this.background = game.add.tileSprite(0, 0, window.innerWidth, game.cache.getImage('background').height, 'background');
+            this.background = game.add.tileSprite(0, 0, game.width, game.cache.getImage('background').height, 'background');
 
             this.createPlatform();
             this.createGroup('pipes', 'pipe', this.addOnePipe, 1500);
@@ -147,7 +146,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
         addOnePipe: function () {
             var pipe = groups['pipes'].getFirstDead();
             var delta = Math.floor(Math.random() * 400);
-            pipe.reset(window.innerWidth, window.innerHeight - 120 - delta);
+            pipe.reset(game.width, game.height - 120 - delta);
             pipe.body.velocity.x = -200;
             pipe.checkWorldBounds = true;
             pipe.outOfBoundsKill = true;
@@ -157,7 +156,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
         addOneRazor: function () {
             var razor = groups['razors'].getFirstDead();
             var delta = Math.floor(Math.random() * 400);
-            razor.reset(window.innerWidth, window.innerHeight - 100 - delta);
+            razor.reset(game.width, game.height - 100 - delta);
             razor.body.velocity.x = -200;
             razor.checkWorldBounds = true;
             razor.outOfBoundsKill = true;
@@ -166,7 +165,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
         addOnePowerup: function () {
             var powerup = groups['powerups'].getFirstDead();
             var delta = Math.floor(Math.random() * 200);
-            powerup.reset(window.innerWidth, window.innerHeight - 150 - delta);
+            powerup.reset(game.width, game.height - 150 - delta);
             powerup.scale.setTo(2, 2);
             powerup.body.velocity.x = -200;
             powerup.checkWorldBounds = true;
@@ -177,7 +176,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
         addOneStar: function () {
             var star = groups['stars'].getFirstDead();
             var delta = Math.floor(Math.random() * 300);
-            star.reset(window.innerWidth, window.innerHeight / 2 - delta);
+            star.reset(game.width, game.height / 2 - delta);
             star.scale.setTo(2, 2);
             star.body.velocity.x = -200;
             star.checkWorldBounds = true;

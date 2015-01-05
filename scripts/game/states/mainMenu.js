@@ -1,7 +1,9 @@
 define(function () {
     'use strict';
+    var game;
 
-    function MainMenu() {
+    function MainMenu(_game) {
+        game = _game;
     }
 
     MainMenu.prototype = {
@@ -12,7 +14,7 @@ define(function () {
 
         create: function () {
             this.input.keyboard.createCursorKeys();
-            this.background = this.add.tileSprite(0, 0, window.innerWidth, window.innerHeight, 'background');
+            this.background = this.add.tileSprite(0, 0, game.width, game.height, 'background');
 
             this.add.button(580, 200, 'button-start', this.startGame, this, 1, 0, 2);
         },

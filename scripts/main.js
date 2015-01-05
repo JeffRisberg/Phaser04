@@ -5,7 +5,7 @@ requirejs.config({
     paths: {
         //libs
         almond: '../bower_components/almond/almond',
-        Phaser: '../bower_components/phaser/index',
+        Phaser: '../bower_components/phaser/build/phaser.min',
 
         //states
         mainMenuState: 'game/states/mainMenu',
@@ -18,7 +18,7 @@ require([
     'mainMenuState',
     'gameState'
 ], function (Phaser, mainMenu, game) {
-    var phaserGame = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'Phaser04');
+    var phaserGame = new Phaser.Game("100", "100", Phaser.AUTO, 'Phaser04');
 
     phaserGame.state.add('MainMenu', mainMenu);
     phaserGame.state.add('Game', game);
