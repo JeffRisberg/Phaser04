@@ -202,7 +202,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
             energy--;
             energyText.text = 'Energy: ' + energy;
 
-            if (energy <= 0) {
+            if (energy < 1) {
                 // Set the alive property of the player to false
                 player.alive = false;
 
