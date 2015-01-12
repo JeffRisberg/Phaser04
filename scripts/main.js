@@ -4,8 +4,8 @@ requirejs.config({
     //baseUrl: './scripts',
     paths: {
         //libs
-        almond: 'bower_components/almond/almond',
-        phaser: 'bower_components/phaser/build/phaser.min',
+        almond: '../bower_components/almond/almond',
+        phaser: '../bower_components/phaser/build/phaser.min',
 
         //states
         mainMenuState: 'game/states/mainMenu',
