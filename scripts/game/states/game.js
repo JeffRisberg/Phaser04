@@ -15,7 +15,6 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
 
     Game.prototype = {
         preload: function () {
-            //preload image
             this.load.image('background', 'media/backgrounds/background.png');
             this.load.image('ground', 'media/backgrounds/ground.png');
             this.load.image('pipe', 'media/characters/pipe.png');
@@ -30,7 +29,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
 
             this.load.spritesheet('dude', 'media/characters/dude.png', 32, 48);
 
-            game.load.audio('sfx', 'media/audio/fx_mixdown.ogg');
+            this.load.audio('sfx', 'media/audio/fx_mixdown.ogg');
         },
 
         create: function () {
@@ -52,7 +51,7 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
             game.physics.arcade.enable(player);
             player.x = Math.floor((game.world.width) / 4);
 
-            //  Player physics properties. Give the little guy a slight bounce.
+            // Player physics properties. Give the little guy a slight bounce.
             player.body.bounce.y = 0.2;
             player.body.gravity.y = 2000;
             player.body.collideWorldBounds = true;
@@ -114,7 +113,6 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
         },
 
         update: function () {
-            // check for collisions
             game.physics.arcade.overlap(player, groups["pipes"], this.hitBaddie, null, this);
             game.physics.arcade.overlap(player, groups["razors"], this.hitBaddie, null, this);
             game.physics.arcade.overlap(player, groups["powerups"], this.eatPowerup, null, this);
@@ -203,7 +201,6 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
             energyText.text = 'Energy: ' + energy;
 
             if (energy < 1) {
-                // Set the alive property of the player to false
                 player.alive = false;
 
                 // Prevent new sprites from appearing
