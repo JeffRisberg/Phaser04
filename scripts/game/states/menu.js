@@ -2,11 +2,11 @@ define(function () {
     'use strict';
     var game;
 
-    function MainMenu(_game) {
+    function Menu(_game) {
         game = _game;
     }
 
-    MainMenu.prototype = {
+    Menu.prototype = {
         preload: function () {
             this.load.image('menu', 'media/backgrounds/mainMenu.png');
             this.load.spritesheet('btn-game-start', 'media/buttons/btn-game-start.png', 401, 143);
@@ -23,9 +23,9 @@ define(function () {
         },
 
         startGame: function () {
-            this.game.state.start('Game');
+            this.game.state.start('game');
         }
     };
 
-    return MainMenu;
+    return Menu;
 });

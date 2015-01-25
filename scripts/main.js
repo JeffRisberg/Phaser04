@@ -1,29 +1,28 @@
 'use strict';
 
 requirejs.config({
-    //baseUrl: './scripts',
     paths: {
         //libs
         almond: '../bower_components/almond/almond',
         phaser: '../bower_components/phaser/build/phaser.min',
 
         //states
-        mainMenuState: 'game/states/mainMenu',
+        menuState: 'game/states/menu',
         gameState: 'game/states/game'
     }
 });
 
 require([
     'phaser',
-    'mainMenuState',
+    'menuState',
     'gameState'
-], function (phaser, mainMenu, game) {
+], function (phaser, menu, game) {
     var phaserGame = new Phaser.Game("100", "100", Phaser.AUTO, 'Phaser04');
 
-    phaserGame.state.add('MainMenu', mainMenu);
-    phaserGame.state.add('Game', game);
+    phaserGame.state.add('menu', menu);
+    phaserGame.state.add('game', game);
 
-    phaserGame.state.start('MainMenu');
+    phaserGame.state.start('menu');
 
     return phaserGame;
 });
