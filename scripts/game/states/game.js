@@ -123,20 +123,12 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
 
             this.background.tilePosition.x -= 3;
 
-            player.body.velocity.x = 0;
-            player.rotation = 0;
-
             player.animations.play('right');
 
             if (player.alive) {
-                if (cursors.down.isDown) {
-                    player.animations.stop();
-                    player.anchor = {x: 0.5, y: 0.5};
-                    player.rotation = 3.14 / 2;
-                    player.frame = 4;
-                } else if (cursors.up.isDown && player.body.touching.down
+                if (cursors.up.isDown && player.body.touching.down
                     || (this.input.pointer1.isDown && player.body.touching.down)) {
-                    //  Move to the left
+                    // Jump up
                     player.body.velocity.y = -1300;
                 }
             }
@@ -236,16 +228,16 @@ define(['game/extensions/PausePanel'], function (PausePanel) {
         createPlatform: function () {
             platforms = game.add.group();
 
-            //  We will enable physics for any object that is created in this group
+            // We will enable physics for any object that is created in this group
             platforms.enableBody = true;
 
             // Here we create the ground.
             var ground = platforms.create(0, game.world.height - 50, 'ground');
 
-            //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+            // Scale it to fit the width of the game (the original sprite is 400x32 in size)
             ground.scale.setTo(4, 1);
 
-            //  This stops it from falling away when you jump on it
+            // This stops it from falling away when you jump on it
             ground.body.immovable = true;
         }
     };
