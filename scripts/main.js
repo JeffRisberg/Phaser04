@@ -9,8 +9,8 @@ requirejs.config({
 
 require([
     'phaser',
-    './game/states/menuState',
-    './game/states/gameState'
+    './game/states/MenuState',
+    './game/states/GameState'
 ], function (phaser, menuState, gameState) {
     var phaserGame = new Phaser.Game("100", "100", Phaser.AUTO, 'Phaser04');
 
